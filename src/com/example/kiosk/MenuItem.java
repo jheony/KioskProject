@@ -3,9 +3,9 @@ package com.example.kiosk;
 // 개별 음식 항목을 관리하는 클래스
 public class MenuItem {
     // 속
-    private String name;
-    private double price;
-    private String description;
+    String name;
+    double price;
+    String description;
 
     // 생
     // 메뉴의 이름, 가격, 설명 세팅
