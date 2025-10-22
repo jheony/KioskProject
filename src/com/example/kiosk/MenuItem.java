@@ -1,6 +1,6 @@
 package com.example.kiosk;
 
-// 세부 메뉴 속성을 가지는 클래스
+// 개별 음식 항목을 관리하는 클래스
 public class MenuItem {
     // 속
     private String name;
@@ -8,7 +8,7 @@ public class MenuItem {
     private String description;
 
     // 생
-    // new MenuItem("ShackBurger", 6.9, "토마토, 양상추, 쉑소스가 토핑된 치즈버거")
+    // 메뉴의 이름, 가격, 설명 세팅
     public MenuItem(String name, double price, String description) {
         this.name = name;
         this.price = price;
@@ -16,9 +16,9 @@ public class MenuItem {
     }
 
     // 기
-    public String toString(){
-        String menuDescription = this.name +"\t\t| W " + this.price + "\t| "+this.description;
-        return menuDescription;
+    // 메뉴의 (이름+가격+설명) 반환
+    public String menuDescription(){
+        return this.name +"\t\t| W " + this.price + "\t| "+this.description;
     }
 
 }
