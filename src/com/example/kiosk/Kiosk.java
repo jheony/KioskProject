@@ -6,13 +6,12 @@ import java.util.Scanner;
 // 키오스크 프로그램의 메뉴를 관리하고 사용자 입력을 처리하는 클래스
 public class Kiosk {
     // 속
-    List<Menu> menuList;
+    private final List<Menu> menuList;
 
     // 생
     public Kiosk(List<Menu> menuList) {
         this.menuList = menuList;
     }
-
 
     // 기
     public void start() {
@@ -26,12 +25,8 @@ public class Kiosk {
         // 반복문 시작
         while (isRunning) {
 
-            // List와 Menu 클래스 활용하여 상위 카테고리 메뉴 출력
-            System.out.println("\n[ MAIN MENU ]");
-            for (int i = 0; i < menuList.size(); i++) {
-                System.out.println((i + 1) + ". " + menuList.get(i).category);
-            }
-            System.out.println("0. 종료\t\t| 종료");
+            // 메인 메뉴 출력
+            showMenu();
 
             try {
                 // 숫자 입력 받기
@@ -44,15 +39,12 @@ public class Kiosk {
                     // 프로그램 종료
                     isRunning = false;
                     System.out.println("메뉴 선택을 종료합니다.");
-                }
-                else if (0 < choiceNum && choiceNum <= menuList.size()) {
-                    // 선택한 카테고리 메뉴의 아이템 리스트 가져오기
-                    List<MenuItem> choiceMenuItems = menuList.get(choiceNum - 1).menuItems;
+                } else if (0 < choiceNum && choiceNum <= menuList.size()) {
+                    // 선택한 카테고리 메뉴 가져오기
+                    Menu choiceMenu = menuList.get(choiceNum - 1);
 
-                    // 카테고리 메뉴의 아이템 출력
-                    for (int j = 0; j < choiceMenuItems.size(); j++) {
-                        System.out.println((j + 1) + ". " + choiceMenuItems.get(j).menuDescription());
-                    }
+                    // 메뉴판 출력
+                    choiceMenu.showMenuItems();
                     System.out.println("0. 뒤로가기");
 
                     // 0번 뒤로가기 체크
@@ -66,14 +58,11 @@ public class Kiosk {
                             // 입력된 숫자에 따른 처리
                             if (choiceNum == 0) {
                                 isInMenu = false;
-                                System.out.println("메인 메뉴로 돌아갑니다.");
-                            }
-                            else if (0 < choiceNum && choiceNum <= choiceMenuItems.size()) {
+                                System.out.println("메인 메뉴로 돌아갑니다.\n");
+                            } else if (0 < choiceNum && choiceNum <= choiceMenu.getMenuItemsSize()) {
                                 // 유효한 메뉴 번호라면 메뉴아이템 출력
                                 System.out.println("선택한 메뉴: "
-                                        + choiceMenuItems
-                                        .get(choiceNum - 1)
-                                        .menuDescription());
+                                        + choiceMenu.getMenuItem(choiceNum - 1).menuDescription());
                             } else {
                                 // 입력 오류
                                 throw new Exception();
@@ -91,5 +80,14 @@ public class Kiosk {
                 System.out.println("메뉴에 있는 번호를 입력해주세요.");
             }
         }
+    }
+
+    // 메인메뉴판 출력
+    public void showMenu() {
+        System.out.println("[ MAIN MENU ]");
+        for (int i = 0; i < menuList.size(); i++) {
+            System.out.println((i + 1) + ". " + menuList.get(i).getCategory());
+        }
+        System.out.println("0. 종료\t\t| 종료");
     }
 }
