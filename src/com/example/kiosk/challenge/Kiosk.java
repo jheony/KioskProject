@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class Kiosk {
     // 속
     private final List<Menu> menuList;
-    private final Cart cart = new Cart();
+    private Cart cart = new Cart();
 
     // 생
     public Kiosk(List<Menu> menuList) {
@@ -17,6 +17,7 @@ public class Kiosk {
     // 기
     public void start() {
 
+
         // 0이 들어오면 true로 설정하여 반복문 종료
         boolean isRunning = true;
 
@@ -24,19 +25,31 @@ public class Kiosk {
         while (isRunning) {
 
             // 메인 메뉴 출력
-            showMenu();
+            showMainMenu();
 
+            if (cart.isInItem()) {
+                showOrderMenu();
+            }
             try {
                 // 숫자 입력 받기
+                System.out.print("메뉴를 선택하세요: ");
                 int choiceNum = inputChoice();
 
                 // 입력 받은 숫자가 올바르다면 인덱스로 활용하여 List에 접근하기
                 // 입력된 숫자에 따른 처리
                 if (choiceNum == 0) {
+
                     // 프로그램 종료
                     isRunning = false;
-                    System.out.println("메뉴 선택을 종료합니다.");
+                    System.out.println("프로그램을 종료합니다.");
+
+                    // 장바구니 목록 출력
+                    cart.showCartItems();
+
+                    // 총 가격 출력
+                    System.out.println("[ Total ]\nW " + cart.totalPrice());
                 } else if (0 < choiceNum && choiceNum <= menuList.size()) {
+
                     // 선택한 카테고리 메뉴 가져오기
                     Menu choiceMenu = menuList.get(choiceNum - 1);
 
@@ -44,7 +57,9 @@ public class Kiosk {
                     choiceMenu.showMenuItems();
                     System.out.println("0. 뒤로가기");
 
+                    // 0번 뒤로가기 체크
                     try {
+
                         // 숫자 입력 받기
                         choiceNum = inputChoice();
 
@@ -73,17 +88,38 @@ public class Kiosk {
                             System.out.println("\n아래 메뉴판을 보시고 메뉴를 골라 입력해주세요.\n");
 
                         } else {
+
                             // 입력 오류
                             throw new Exception();
                         }
                     } catch (Exception e) {
                         System.out.println("메뉴에 있는 번호를 입력해주세요.");
                     }
+                } else if (cart.isInItem() && choiceNum == 4) {
+                    // Orders 선택
+                    System.out.println("\n아래와 같이 주문 하시겠습니까?");
+                    cart.showCartItems();
+                    System.out.println("\n[ Total ]\nW " + cart.totalPrice());
+                    System.out.println("\n1. 주문\t\t2. 메뉴판");
+
+                    // 숫자 입력 받기
+                    choiceNum = inputChoice();
+
+                    if (choiceNum == 1) {
+                        System.out.println("\n주문이 완료되었습니다. 금액은 W " + cart.totalPrice() + " 입니다.");
+
+                        // 주문 완료 후 장바구니 초기화
+                        cart = new Cart();
+                        isRunning = false;
+                        System.out.println("프로그램을 종료합니다.");
+                    }
                 } else {
+
                     // 입력 오류
                     throw new Exception();
                 }
             } catch (Exception e) {
+
                 // 예외 메세지 출력
                 System.out.println("메뉴에 있는 번호를 입력해주세요.");
             }
@@ -91,7 +127,7 @@ public class Kiosk {
     }
 
     // 메인메뉴판 출력
-    public void showMenu() {
+    public void showMainMenu() {
         System.out.println("[ MAIN MENU ]");
         for (int i = 0; i < menuList.size(); i++) {
             System.out.println((i + 1) + ". " + menuList.get(i).getCategory());

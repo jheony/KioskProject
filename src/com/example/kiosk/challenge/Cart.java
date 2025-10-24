@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class Cart {
     // 속
-    private final Map<MenuItem, Integer> items = new HashMap<>();
+    Map<MenuItem, Integer> items = new HashMap<>();
 
     // 생
 
@@ -51,7 +51,7 @@ public class Cart {
     }
 
     // 장바구니에 물품이 있다면 true
-    public boolean isInItem() {
+    public boolean isInItem(){
         return !this.items.isEmpty();
     }
 }

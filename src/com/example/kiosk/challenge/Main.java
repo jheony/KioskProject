@@ -45,6 +45,5 @@ public class Main {
 
         // 메뉴 선택 시작
         kiosk.start();
-        System.out.println("프로그램을 종료합니다.");
     }
 }
