@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class Kiosk {
     // 속
     private final List<Menu> menuList;
+    private final Cart cart = new Cart();
 
     // 생
     public Kiosk(List<Menu> menuList) {
@@ -47,29 +48,28 @@ public class Kiosk {
                     choiceMenu.showMenuItems();
                     System.out.println("0. 뒤로가기");
 
-                    // 0번 뒤로가기 체크
-                    boolean isInMenu = true;
-                    while (isInMenu) {
-                        try {
-                            // 숫자 입력 받기
-                            choice = scanner.nextLine();
-                            choiceNum = Integer.parseInt(choice);
+                    try {
+                        // 숫자 입력 받기
+                        choice = scanner.nextLine();
+                        choiceNum = Integer.parseInt(choice);
 
-                            // 입력된 숫자에 따른 처리
-                            if (choiceNum == 0) {
-                                isInMenu = false;
-                                System.out.println("메인 메뉴로 돌아갑니다.\n");
-                            } else if (0 < choiceNum && choiceNum <= choiceMenu.getMenuItemsSize()) {
-                                // 유효한 메뉴 번호라면 메뉴아이템 출력
-                                System.out.println("선택한 메뉴: "
-                                        + choiceMenu.getMenuItem(choiceNum - 1).menuDescription());
-                            } else {
-                                // 입력 오류
-                                throw new Exception();
-                            }
-                        } catch (Exception e) {
-                            System.out.println("메뉴에 있는 번호를 입력해주세요.");
+                        // 입력된 숫자에 따른 처리
+                        if (choiceNum == 0) {
+                            System.out.println("메인 메뉴로 돌아갑니다.\n");
+                        } else if (0 < choiceNum && choiceNum <= choiceMenu.getMenuItemsSize()) {
+                            MenuItem choiceMenuItem = choiceMenu.getMenuItem(choiceNum - 1);
+
+                            // 유효한 메뉴 번호라면 메뉴아이템 출력
+                            System.out.println("선택한 메뉴: " + choiceMenuItem.menuDescription());
+                            cart.addItem(choiceMenuItem);
+                            cart.showCartItems();
+
+                        } else {
+                            // 입력 오류
+                            throw new Exception();
                         }
+                    } catch (Exception e) {
+                        System.out.println("메뉴에 있는 번호를 입력해주세요.");
                     }
                 } else {
                     // 입력 오류
