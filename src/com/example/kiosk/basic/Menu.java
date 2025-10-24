@@ -1,4 +1,4 @@
-package com.example.kiosk;
+package com.example.kiosk.basic;
 
 import java.util.ArrayList;
 import java.util.List;

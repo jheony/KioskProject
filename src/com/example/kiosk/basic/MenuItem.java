@@ -1,4 +1,4 @@
-package com.example.kiosk;
+package com.example.kiosk.basic;
 
 // 개별 음식 항목을 관리하는 클래스
 public class MenuItem {

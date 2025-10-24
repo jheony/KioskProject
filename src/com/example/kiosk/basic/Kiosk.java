@@ -1,4 +1,4 @@
-package com.example.kiosk;
+package com.example.kiosk.basic;
 
 import java.util.List;
 import java.util.Scanner;
