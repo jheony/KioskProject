@@ -17,9 +17,6 @@ public class Kiosk {
     // 기
     public void start() {
 
-        // Scanner 선언
-        Scanner scanner = new Scanner(System.in);
-
         // 0이 들어오면 true로 설정하여 반복문 종료
         boolean isRunning = true;
 
@@ -31,8 +28,7 @@ public class Kiosk {
 
             try {
                 // 숫자 입력 받기
-                String choice = scanner.nextLine();
-                int choiceNum = Integer.parseInt(choice);
+                int choiceNum = inputChoice();
 
                 // 입력 받은 숫자가 올바르다면 인덱스로 활용하여 List에 접근하기
                 // 입력된 숫자에 따른 처리
@@ -50,8 +46,7 @@ public class Kiosk {
 
                     try {
                         // 숫자 입력 받기
-                        choice = scanner.nextLine();
-                        choiceNum = Integer.parseInt(choice);
+                        choiceNum = inputChoice();
 
                         // 입력된 숫자에 따른 처리
                         if (choiceNum == 0) {
@@ -61,8 +56,21 @@ public class Kiosk {
 
                             // 유효한 메뉴 번호라면 메뉴아이템 출력
                             System.out.println("선택한 메뉴: " + choiceMenuItem.menuDescription());
-                            cart.addItem(choiceMenuItem);
-                            cart.showCartItems();
+
+                            // 장바구니에 추가 여부 질문
+                            System.out.println("\n\"" + choiceMenuItem.menuDescription() + "\"");
+                            System.out.println("위 메뉴를 장바구니에 추가하시겠습니까?");
+                            System.out.println("1. 확인\t\t\t2. 취소");
+
+                            // 숫자 입력 받기
+                            choiceNum = inputChoice();
+
+                            if (choiceNum == 1) {
+                                // 장바구니에 추가
+                                cart.addItem(choiceMenuItem);
+                            }
+
+                            System.out.println("\n아래 메뉴판을 보시고 메뉴를 골라 입력해주세요.\n");
 
                         } else {
                             // 입력 오류
@@ -89,5 +97,23 @@ public class Kiosk {
             System.out.println((i + 1) + ". " + menuList.get(i).getCategory());
         }
         System.out.println("0. 종료\t\t| 종료");
+    }
+
+    public void showOrderMenu() {
+        System.out.println("""
+                
+                [ ORDER MENU ]
+                4. Orders\t\t| 장바구니를 확인 후 주문합니다.
+                5. Cancel\t\t| 진행중인 주문을 취소합니다.""");
+    }
+
+    // 숫자 입력 받기
+    public int inputChoice() {
+        Scanner scanner = new Scanner(System.in);
+
+        String choice = scanner.nextLine();
+        int num = Integer.parseInt(choice);
+
+        return num;
     }
 }
