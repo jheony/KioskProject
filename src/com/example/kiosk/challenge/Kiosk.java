@@ -166,7 +166,7 @@ public class Kiosk {
     public double discountTotalPrice(int choiceNum) {
         double totalPrice = cart.totalPrice();
         int discountRate = DiscountType.values()[choiceNum - 1].getDiscountRate();
-        totalPrice -= totalPrice / (100.0/discountRate);
+        totalPrice -= totalPrice / (100.0 / discountRate);
         return totalPrice;
     }
 }
