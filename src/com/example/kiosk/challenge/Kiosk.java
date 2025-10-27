@@ -17,7 +17,6 @@ public class Kiosk {
     // 기
     public void start() {
 
-
         // 0이 들어오면 true로 설정하여 반복문 종료
         boolean isRunning = true;
 
@@ -60,7 +59,7 @@ public class Kiosk {
                     // 0번 뒤로가기 체크
                     try {
 
-                        // 숫자 입력 받기
+                        // 카테고리 내 메뉴 입력 받기
                         choiceNum = inputChoice();
 
                         // 입력된 숫자에 따른 처리
@@ -77,7 +76,7 @@ public class Kiosk {
                             System.out.println("위 메뉴를 장바구니에 추가하시겠습니까?");
                             System.out.println("1. 확인\t\t\t2. 취소");
 
-                            // 숫자 입력 받기
+                            // 장바구니 추가 여부 입력 받기
                             choiceNum = inputChoice();
 
                             if (choiceNum == 1) {
@@ -102,11 +101,21 @@ public class Kiosk {
                     System.out.println("\n[ Total ]\nW " + cart.totalPrice());
                     System.out.println("\n1. 주문\t\t2. 메뉴판");
 
-                    // 숫자 입력 받기
+                    // 주문 여부 입력 받기
                     choiceNum = inputChoice();
 
                     if (choiceNum == 1) {
-                        System.out.println("\n주문이 완료되었습니다. 금액은 W " + cart.totalPrice() + " 입니다.");
+                        int idx = 0;
+                        System.out.println("\n할인 정보를 입력해주세요.");
+                        for (DiscountType discountType : DiscountType.values()) {
+                            System.out.println(++idx + ". " + discountType.getUserType() + "\t\t: "
+                                    + discountType.getDiscountRate() + "%");
+                        }
+                        // 할인 정보 입력 받기
+                        choiceNum = inputChoice();
+                        double totalPrice = discountTotalPrice(choiceNum);
+
+                        System.out.printf("%n주문이 완료되었습니다. 금액은 W %.2f 입니다.%n", totalPrice);
 
                         // 주문 완료 후 장바구니 초기화
                         cart = new Cart();
@@ -151,5 +160,13 @@ public class Kiosk {
         int num = Integer.parseInt(choice);
 
         return num;
+    }
+
+    // 할인된 가격 반환
+    public double discountTotalPrice(int choiceNum) {
+        double totalPrice = cart.totalPrice();
+        int discountRate = DiscountType.values()[choiceNum - 1].getDiscountRate();
+        totalPrice -= totalPrice / (100.0/discountRate);
+        return totalPrice;
     }
 }
