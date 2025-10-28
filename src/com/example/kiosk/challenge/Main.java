@@ -20,20 +20,20 @@ public class Main {
 
         // 메뉴아이템 추가
         // add 함수를 통해 new MenuItem(이름, 가격, 설명) List에 삽입
-        burgers.addMenuItem("ShackBurger", 6.9, "토마토, 양상추, 쉑소스가 토핑된 치즈버거");
-        burgers.addMenuItem("SmokeShack", 8.9, "베이컨, 체리 페퍼에 쉑소스가 토핑된 치즈버거");
-        burgers.addMenuItem("Cheeseburger", 6.9, "포테이토 번과 비프패티, 치즈가 토핑된 치즈버거");
-        burgers.addMenuItem("Hamburger", 5.4, "비프패티를 기반으로 야채가 들어간 기본버거");
+        burgers.addMenuItem(new MenuItem("ShackBurger", 6.9, "토마토, 양상추, 쉑소스가 토핑된 치즈버거"));
+        burgers.addMenuItem(new MenuItem("SmokeShack", 8.9, "베이컨, 체리 페퍼에 쉑소스가 토핑된 치즈버거"));
+        burgers.addMenuItem(new MenuItem("Cheeseburger", 6.9, "포테이토 번과 비프패티, 치즈가 토핑된 치즈버거"));
+        burgers.addMenuItem(new MenuItem("Hamburger", 5.4, "비프패티를 기반으로 야채가 들어간 기본버거"));
 
-        drinks.addMenuItem("사이다", 2.0, "500ml");
-        drinks.addMenuItem("환타", 1.5, "파인애플");
-        drinks.addMenuItem("콜라", 2.0, "355ml");
-        drinks.addMenuItem("펩시제로", 3.0, "355ml");
+        drinks.addMenuItem(new MenuItem("사이다", 2.0, "500ml"));
+        drinks.addMenuItem(new MenuItem("환타", 1.5, "파인애플"));
+        drinks.addMenuItem(new MenuItem("콜라", 2.0, "355ml"));
+        drinks.addMenuItem(new MenuItem("펩시제로", 3.0, "355ml"));
 
-        desserts.addMenuItem("에그타르트", 3.5, "파삭 달다구리");
-        desserts.addMenuItem("아이스크림", 2.0, "소프트");
-        desserts.addMenuItem("치즈스틱", 2.5, "쭈우우우우욱");
-        desserts.addMenuItem("감자튀김", 5.0, "눅눅");
+        desserts.addMenuItem(new MenuItem("에그타르트", 3.5, "파삭 달다구리"));
+        desserts.addMenuItem(new MenuItem("아이스크림", 2.0, "소프트"));
+        desserts.addMenuItem(new MenuItem("치즈스틱", 2.5, "쭈우우우우욱"));
+        desserts.addMenuItem(new MenuItem("감자튀김", 5.0, "눅눅"));
 
         // 메뉴 추가
         menuList.add(burgers);

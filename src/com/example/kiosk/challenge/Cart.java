@@ -3,15 +3,15 @@ package com.example.kiosk.challenge;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Cart {
+public class Cart <T extends MenuItem> {
     // 속
-    Map<MenuItem, Integer> items = new HashMap<>();
+    private Map<T, Integer> items = new HashMap<>();
 
     // 생
 
     // 기
     // 장바구니에 물품 추가
-    public void addItem(MenuItem menuItem) {
+    public void addItem(T menuItem) {
 
         // 장바구니에 해당 물품이 있는지 검사
         if (items.containsKey(menuItem)) {
@@ -33,7 +33,7 @@ public class Cart {
             System.out.println("\n[ Orders ]");
 
             // 물품 출력
-            for (MenuItem item : items.keySet()) {
+            for (T item : items.keySet()) {
                 int quantity = items.get(item); // 물품 수량
                 System.out.println("수량: " + quantity + " \t| " + item.menuDescription());
             }
@@ -43,7 +43,7 @@ public class Cart {
     // 총 금액 반환
     public double totalPrice() {
         double totalPrice = 0;
-        for (MenuItem item : items.keySet()) {
+        for (T item : items.keySet()) {
             int quantity = items.get(item); // 물품 수량
             totalPrice += item.getPrice() * quantity;
         }
@@ -59,14 +59,14 @@ public class Cart {
     public double discountTotalPrice(int choiceNum) {
         double totalPrice = this.totalPrice();
         int discountRate = DiscountType.values()[choiceNum - 1].getDiscountRate();
-        totalPrice -= totalPrice / (100.0 / discountRate);
+        totalPrice -= totalPrice * (discountRate / 100.0);
         return totalPrice;
     }
 
     // 특정 메뉴아이템 제거
     public void removeMenuItem(String removeMenuItemName){
         // 물품명으로 장바구니에서 해당 물품 찾기
-        MenuItem menuItem = items.keySet().stream()
+        T menuItem = items.keySet().stream()
                 .filter(item -> item.getName().equals(removeMenuItemName))
                 .findFirst().orElseThrow();
 
