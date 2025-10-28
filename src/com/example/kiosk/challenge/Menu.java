@@ -6,10 +6,10 @@ import java.util.stream.IntStream;
 
 // MenuItem 클래스를 관리하는 클래스
 //  버거 메뉴, 음료 메뉴 등 각 카테고리 내에 여러 MenuItem을 포함합니다.
-public class Menu <T extends MenuItem>{
+public class Menu{
     // 속
     private final String category;
-    private final List<T> menuItems = new ArrayList<>();
+    private final List<MenuItem> menuItems = new ArrayList<>();
 
     // 생
     public Menu(String category) {
@@ -28,12 +28,12 @@ public class Menu <T extends MenuItem>{
     }
 
     // 원하는 메뉴아이템을 반환합니다.
-    public T getMenuItem(int idx) {
+    public MenuItem getMenuItem(int idx) {
         return menuItems.get(idx);
     }
 
     // 메뉴아이템을 추가합니다.
-    public void addMenuItem(T menuItem) {
+    public void addMenuItem(MenuItem menuItem) {
         menuItems.add(menuItem);
     }
 

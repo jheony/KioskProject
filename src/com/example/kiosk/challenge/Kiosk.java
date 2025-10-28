@@ -7,8 +7,8 @@ import java.util.Scanner;
 public class Kiosk {
     // 속
     private final List<Menu> menuList;
-    private Cart cart = new Cart();
     Scanner scanner = new Scanner(System.in);
+    private Cart cart = new Cart();
 
     // 생
     public Kiosk(List<Menu> menuList) {
@@ -113,14 +113,22 @@ public class Kiosk {
                         cart = new Cart();
                         isRunning = false;
                         System.out.println("프로그램을 종료합니다.");
-                    }else if(choiceNum == 3){
+                    } else if (choiceNum == 3) {
                         System.out.println("어떤 메뉴를 삭제하시겠습니까? 메뉴명을 입력해주세요.");
                         cart.showCartItems();
+
+                        // 삭제할 메뉴명 입력
                         String inputMenuName = scanner.nextLine();
+
                         cart.removeMenuItem(inputMenuName);
-                        System.out.println(inputMenuName+" 이(가) 장바구니에서 삭제되었습니다.");
+                        System.out.println(inputMenuName + " 이(가) 장바구니에서 삭제되었습니다.");
                     }
-                } else {
+                }else if(cart.isInItem() && choiceNum == 5){
+                    // TODO: 주문 취소
+                    // 장바구니 비우기
+
+                }
+                else {
 
                     // 입력 오류
                     throw new Exception();
