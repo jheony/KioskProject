@@ -5,18 +5,23 @@
 
 package com.example.kiosk.challenge;
 
+import com.example.kiosk.challenge.food.Burgers;
+import com.example.kiosk.challenge.food.Desserts;
+import com.example.kiosk.challenge.food.Drinks;
+import com.example.kiosk.challenge.food.Food;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
 
-        List<Menu> menuList = new ArrayList<>();
+        List<Menu<? extends Food>> menuList = new ArrayList<>();
 
         // Menu 객체 생성을 통해 category 설정
-        Menu burgers = new Menu("Burgers");
-        Menu drinks = new Menu("Drinks");
-        Menu desserts = new Menu("Desserts");
+        Menu<Food> burgers = new Menu<>("burgers");
+        Menu<Drinks> drinks = new Menu<>("Drinks");
+        Menu<Desserts> desserts = new Menu<>("Desserts");
 
         // 메뉴아이템 추가
         // add 함수를 통해 new MenuItem(이름, 가격, 설명) List에 삽입

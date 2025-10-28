@@ -1,17 +1,19 @@
 package com.example.kiosk.challenge;
 
+import com.example.kiosk.challenge.food.Food;
+
 import java.util.List;
 import java.util.Scanner;
 
 // 키오스크 프로그램의 메뉴를 관리하고 사용자 입력을 처리하는 클래스
 public class Kiosk {
     // 속
-    private final List<Menu> menuList;
+    private final List<Menu<? extends Food>> menuList;
     Scanner scanner = new Scanner(System.in);
     private Cart cart = new Cart();
 
     // 생
-    public Kiosk(List<Menu> menuList) {
+    public Kiosk(List<Menu<? extends Food>> menuList) {
         this.menuList = menuList;
     }
 

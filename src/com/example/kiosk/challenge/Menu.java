@@ -1,12 +1,14 @@
 package com.example.kiosk.challenge;
 
+import com.example.kiosk.challenge.food.Food;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
 // MenuItem 클래스를 관리하는 클래스
 //  버거 메뉴, 음료 메뉴 등 각 카테고리 내에 여러 MenuItem을 포함합니다.
-public class Menu{
+public class Menu <T extends Food> {
     // 속
     private final String category;
     private final List<MenuItem> menuItems = new ArrayList<>();
