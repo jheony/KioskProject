@@ -35,5 +35,4 @@ public class MenuItem {
     public String menuDescription() {
         return this.name + "\t\t| W " + this.price + "\t| " + this.description;
     }
-
 }

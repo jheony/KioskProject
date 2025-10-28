@@ -54,4 +54,31 @@ public class Cart {
     public boolean isInItem(){
         return !this.items.isEmpty();
     }
+
+    // 할인된 가격 반환
+    public double discountTotalPrice(int choiceNum) {
+        double totalPrice = this.totalPrice();
+        int discountRate = DiscountType.values()[choiceNum - 1].getDiscountRate();
+        totalPrice -= totalPrice / (100.0 / discountRate);
+        return totalPrice;
+    }
+
+    // 특정 메뉴아이템 제거
+    public void removeMenuItem(String removeMenuItemName){
+        // 물품명으로 장바구니에서 해당 물품 찾기
+        MenuItem menuItem = items.keySet().stream()
+                .filter(item -> item.getName().equals(removeMenuItemName))
+                .findFirst().orElseThrow();
+
+        int quantity = items.get(menuItem);
+
+        // 수량이 1이면 메뉴 삭제
+        if(quantity == 1){
+            items.remove(menuItem);
+        }
+        // 수량이 2 이상이면 1감소
+        else{
+            items.put(menuItem, quantity-1);
+        }
+    }
 }
