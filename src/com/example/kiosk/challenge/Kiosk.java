@@ -47,7 +47,7 @@ public class Kiosk {
                 } else if (0 < choiceNum && choiceNum <= menuList.size()) {
 
                     // 선택한 카테고리 메뉴 가져오기
-                    Menu choiceMenu = menuList.get(choiceNum - 1);
+                    Menu<? extends Food> choiceMenu = menuList.get(choiceNum - 1);
 
                     // 메뉴판 출력
                     choiceMenu.showMenuItems();
@@ -125,12 +125,22 @@ public class Kiosk {
                         cart.removeMenuItem(inputMenuName);
                         System.out.println(inputMenuName + " 이(가) 장바구니에서 삭제되었습니다.");
                     }
-                }else if(cart.isInItem() && choiceNum == 5){
-                    // TODO: 주문 취소
-                    // 장바구니 비우기
+                } else if (cart.isInItem() && choiceNum == 5) {
+                    // 진행중인 주문 취소
+                    System.out.println("진행중인 주문을 취소하시겠습니까?");
+                    System.out.println("1. 확인\t\t\t2. 취소");
 
-                }
-                else {
+                    // 취소 여부 입력
+                    choiceNum = inputChoice();
+
+                    if (choiceNum == 1) {
+                        // 장바구니 비우기
+                        cart = new Cart();
+
+                        isRunning = false;
+                        System.out.println("주문을 종료합니다.");
+                    }
+                } else {
 
                     // 입력 오류
                     throw new Exception();
