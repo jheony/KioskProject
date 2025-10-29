@@ -1,19 +1,17 @@
 package com.example.kiosk.challenge;
 
-import com.example.kiosk.challenge.food.Food;
-
 import java.util.List;
 import java.util.Scanner;
 
 // 키오스크 프로그램의 메뉴를 관리하고 사용자 입력을 처리하는 클래스
-public class Kiosk {
+public class Kiosk <T extends MenuItem>{
     // 속
-    private final List<Menu<? extends Food>> menuList;
+    private final List<Menu<T>> menuList;
     Scanner scanner = new Scanner(System.in);
     private Cart cart = new Cart();
 
     // 생
-    public Kiosk(List<Menu<? extends Food>> menuList) {
+    public Kiosk(List<Menu<T>> menuList) {
         this.menuList = menuList;
     }
 
@@ -47,7 +45,7 @@ public class Kiosk {
                 } else if (0 < choiceNum && choiceNum <= menuList.size()) {
 
                     // 선택한 카테고리 메뉴 가져오기
-                    Menu<? extends Food> choiceMenu = menuList.get(choiceNum - 1);
+                    Menu<T> choiceMenu = menuList.get(choiceNum - 1);
 
                     // 메뉴판 출력
                     choiceMenu.showMenuItems();
@@ -61,7 +59,7 @@ public class Kiosk {
                         if (choiceNum == 0) {
                             System.out.println("메인 메뉴로 돌아갑니다.\n");
                         } else if (0 < choiceNum && choiceNum <= choiceMenu.getMenuItemsSize()) {
-                            MenuItem choiceMenuItem = choiceMenu.getMenuItem(choiceNum - 1);
+                            T choiceMenuItem = choiceMenu.getMenuItem(choiceNum - 1);
 
                             // 유효한 메뉴 번호라면 메뉴아이템 출력
                             System.out.println("선택한 메뉴: " + choiceMenuItem.menuDescription());
