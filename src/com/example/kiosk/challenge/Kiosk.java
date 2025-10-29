@@ -32,7 +32,6 @@ public class Kiosk <T extends MenuItem>{
             }
             try {
                 // 숫자 입력 받기
-                System.out.print("메뉴를 선택하세요: ");
                 int choiceNum = inputChoice();
 
                 // 입력 받은 숫자가 올바르다면 인덱스로 활용하여 List에 접근하기
@@ -109,8 +108,9 @@ public class Kiosk <T extends MenuItem>{
 
                         System.out.printf("%n주문이 완료되었습니다. 금액은 W %.2f 입니다.%n", totalPrice);
 
-                        // 주문 완료 후 장바구니 초기화
-                        cart = new Cart();
+                        // 주문 완료 후 장바구니 비우기
+                        cart.emptyCart();
+
                         isRunning = false;
                         System.out.println("프로그램을 종료합니다.");
                     } else if (choiceNum == 3) {
@@ -125,7 +125,7 @@ public class Kiosk <T extends MenuItem>{
                     }
                 } else if (cart.isInItem() && choiceNum == 5) {
                     // 진행중인 주문 취소
-                    System.out.println("진행중인 주문을 취소하시겠습니까?");
+                    System.out.println("\n진행중인 주문을 취소하시겠습니까?");
                     System.out.println("1. 확인\t\t\t2. 취소");
 
                     // 취소 여부 입력
@@ -133,10 +133,9 @@ public class Kiosk <T extends MenuItem>{
 
                     if (choiceNum == 1) {
                         // 장바구니 비우기
-                        cart = new Cart();
+                        cart.emptyCart();
 
-                        isRunning = false;
-                        System.out.println("주문을 종료합니다.");
+                        System.out.println("\n장바구니 비우기 완료");
                     }
                 } else {
 
@@ -181,6 +180,7 @@ public class Kiosk <T extends MenuItem>{
 
     // 숫자 입력 받기
     public int inputChoice() {
+        System.out.print("메뉴를 선택하세요: ");
         String choice = scanner.nextLine();
         int num = Integer.parseInt(choice);
 

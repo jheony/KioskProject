@@ -81,4 +81,9 @@ public class Cart{
             items.put(menuItem, quantity-1);
         }
     }
+
+    // 장바구니 비우기
+    public void emptyCart(){
+        this.items.clear();
+    }
 }
