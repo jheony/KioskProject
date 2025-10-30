@@ -114,10 +114,11 @@ public class Kiosk <T extends MenuItem>{
                         isRunning = false;
                         System.out.println("프로그램을 종료합니다.");
                     } else if (choiceNum == 3) {
-                        System.out.println("어떤 메뉴를 삭제하시겠습니까? 메뉴명을 입력해주세요.");
+                        System.out.println("어떤 메뉴를 삭제하시겠습니까?");
                         cart.showCartItems();
 
                         // 삭제할 메뉴명 입력
+                        System.out.print("삭제할 메뉴명을 입력해주세요: ");
                         String inputMenuName = scanner.nextLine();
 
                         cart.removeMenuItem(inputMenuName);
