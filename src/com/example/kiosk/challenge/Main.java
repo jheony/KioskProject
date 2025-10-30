@@ -1,8 +1,3 @@
-//  도전과제 lv1 목표
-//  클래스 간 역할 분리를 이해하고, 적절히 협력하는 객체를 설계
-//  프로그램 상태 변경 및 데이터 저장을 연습
-//  사용자 입력에 따른 예외 처리와 조건 분기를 연습
-
 package com.example.kiosk.challenge;
 
 import com.example.kiosk.challenge.food.*;
